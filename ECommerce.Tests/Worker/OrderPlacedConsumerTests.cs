@@ -80,7 +80,7 @@ public class OrderPlacedConsumerTests
         await harness.Start();
         try
         {
-            /
+            
             await harness.Bus.Publish<IOrderPlaced>(new
             {
                 OrderId = orderId,
