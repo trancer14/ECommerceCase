@@ -247,7 +247,3 @@ dotnet test ECommerce.Tests
   - RabbitMQ UI’da queue ve binding’leri kontrol edin.
 
 ---
-
-**Lisans:** MIT (isteğe bağlı)
-
-> ✨ Her şey hazır. `docker compose up -d` → `dotnet ef database update` → `dotnet run` (Worker & API). Yardım lazım olursa issue açın veya ping atın.
