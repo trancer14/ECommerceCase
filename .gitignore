@@ -1,0 +1,9 @@
+﻿bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+logs/
+**/appsettings.*.local.json
