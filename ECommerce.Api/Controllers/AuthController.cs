@@ -16,7 +16,7 @@ public class AuthController : ControllerBase
     [HttpPost("token")]
     public IActionResult Token([FromBody] Login dto)
     {
-        // DEMO: sabit kullanıcı
+        // DEMO kullanıcı
         if (dto.Username != "test" || dto.Password != "test123")
             return Unauthorized();
 

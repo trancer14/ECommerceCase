@@ -68,7 +68,7 @@ public class ApiIntegrationTests : IClassFixture<CustomWebApplicationFactory>
             var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             var cache = scope.ServiceProvider.GetRequiredService<ICacheService>();
 
-            await cache.RemoveAsync("orders:u2"); // emin ol
+            await cache.RemoveAsync("orders:u2");
 
             var order = await db.Orders.FindAsync(orderId);
             order.Should().NotBeNull($"order {orderId} should exist in the same InMemory database");
@@ -94,7 +94,6 @@ public class ApiIntegrationTests : IClassFixture<CustomWebApplicationFactory>
         p1.Data.Should().NotBeNull("response.Data should not be null");
         p1.Data!.Count.Should().BeGreaterThan(0, "processed order should be returned");
 
-        // 4) İkinci GET -> cache hit (aynı format)
         var r2 = await client.GetAsync("/orders/u2");
         var body2 = await r2.Content.ReadAsStringAsync();
         if (!r2.IsSuccessStatusCode)

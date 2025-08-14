@@ -51,7 +51,6 @@ public class OrderServiceEdgeTests
     [Fact]
     public async Task GetOrdersOfUser_ShouldReturnFromCache_OnSecondCall()
     {
-        // 1) İlk çağrıda cache miss
         _cache.Setup(c => c.GetStringAsync("orders:u1"))
               .ReturnsAsync((string?)null);
 
@@ -62,13 +61,11 @@ public class OrderServiceEdgeTests
 
         var first = await svc.GetOrdersOfUserAsync("u1", default);
 
-        // 2) İkinci çağrıda cache hit
         var serialized = System.Text.Json.JsonSerializer.Serialize(first);
         _cache.Setup(c => c.GetStringAsync("orders:u1")).ReturnsAsync(serialized);
 
         var second = await svc.GetOrdersOfUserAsync("u1", default);
 
-        // Repo sadece bir kez çalıştı mı?
         _repo.Verify(r => r.GetByUserAsync("u1", It.IsAny<CancellationToken>()), Times.Once);
         second.Should().HaveCount(1);
     }
